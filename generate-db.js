@@ -9,7 +9,7 @@ const gunzipAsync = promisify(gunzip);
 const { TERMUX_SCRIPTDIR, TERMUX_PREFIX, TERMUX_ARCH } = process.env;
 
 if (!TERMUX_SCRIPTDIR) {
-  throw new Error("TERMUX_PKG_CACHEDIR environment variable is not defined");
+  throw new Error("TERMUX_SCRIPTDIR environment variable is not defined");
 }
 
 if (!TERMUX_PREFIX) {
