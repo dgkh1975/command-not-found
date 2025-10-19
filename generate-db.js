@@ -21,9 +21,7 @@ if (!TERMUX_ARCH) {
 }
 
 const binPrefix = TERMUX_PREFIX.substring(1) + "/bin/";
-const repos = JSON.parse(
-  await readFile(join(TERMUX_SCRIPTDIR, "repo.json")),
-);
+const repos = JSON.parse(await readFile(join(TERMUX_SCRIPTDIR, "repo.json")));
 
 /**
  * Parses an alternative file and returns an array of alternative entries.
@@ -55,7 +53,6 @@ async function parseAlternativeFile(filePath) {
     // Comment starts with a '#' and can be at the end of the line as well
     let match = line.match(/\s*#.*/);
     line = line.substring(0, match === null ? line.length : match.index);
-
 
     if (line.startsWith("Name: ")) {
       if (parsingDependents) {
