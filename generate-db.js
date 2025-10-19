@@ -207,9 +207,14 @@ async function processRepo(repo, repoPath, arch) {
         );
 
         const packageName = fileMap.get(join(TERMUX_PREFIX.substring(1), path));
+        // This could happen when there exists alternative file but the package itself doesn't exist for some of the architecture.
+        // This is needed for the openjdk-25 package.
+        // Keep the warning as it might be also due to some other inconsistency in the alternatives file as well. So having it in the logs should be nice
         if (packageName === undefined) {
-          console.error(`Package name not found for path: ${path}`);
-          process.exit(1);
+          console.warn(
+            `WARNING: Package name not found for path: ${path}. Skipping...`,
+          );
+          return;
         }
         if (!binMap.has(packageName)) {
           binMap.set(packageName, []);
